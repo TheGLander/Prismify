@@ -2,7 +2,11 @@
 <html>
   <head>
     <title>Prismify docs</title>
-    <link rel="stylesheet" type="text/css" href="./prismify.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/prismify@1.0.0/prismify.css"
+    />
     <style>
       body {
         font-family: sans-serif;
@@ -322,7 +326,7 @@ prismifyOnPage()</code></pre>
       >).
     </p>
     <script type="module">
-      import { prismifyOnPage } from "./prismify.js"
+      import { prismifyOnPage } from "https://unpkg.com/prismify@1.0.0/prismify.js"
       prismifyOnPage()
       const rotatedInputs = document.querySelectorAll("#rotated-input > *")
       for (const input of rotatedInputs) {
