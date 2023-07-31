@@ -1,0 +1,20 @@
+{
+  "name": "prismify",
+  "version": "1.0.0",
+  "description": "Make CSS-powered 3D prisms of any HTML element!",
+  "module": "prismify.js",
+  "types": "prismify.d.ts",
+  "keywords": [
+    "css",
+    "3d",
+    "fun"
+  ],
+  "author": "G lander",
+  "license": "MIT",
+  "files": [
+    "package.json",
+    "prismify.css",
+    "prismify.d.ts",
+    "prismify.js"
+  ]
+}

@@ -1,0 +1,43 @@
+.prismify {
+  --z-offset: 0.1em;
+  --prism-depth: 1em;
+  --layer-count: 50;
+  --x-rotate-amount: 0deg;
+  --y-rotate-amount: 0deg;
+  transform-style: preserve-3d;
+}
+
+.prismify[active] > * {
+  position: absolute;
+  display: inline;
+  --z-transform: translateZ(
+    calc(var(--z-offset) + var(--index) * var(--prism-depth))
+  );
+}
+
+.prismify:not([active]) > :not(:last-child) {
+  display: none;
+}
+
+.prismify > :last-child {
+  position: static;
+  display: block;
+}
+
+.prismify.fun-mode {
+  transform-style: flat;
+  /* Technically pointless, but whatever? */
+  --z-offset: -0.1em;
+  --prism-depth: -1em;
+}
+
+@keyframes prismify-rotate {
+  from {
+    transform: rotateX(calc(-1 * var(--y-rotate-amount)))
+      rotateY(calc(-1 * var(--x-rotate-amount))) var(--z-transform);
+  }
+  to {
+    transform: rotateX(var(--y-rotate-amount)) rotateY(var(--x-rotate-amount))
+      var(--z-transform);
+  }
+}

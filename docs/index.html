@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prismify docs</title>
+    <link rel="stylesheet" type="text/css" href="../prismify.css" />
+    <style>
+      body {
+        font-family: sans-serif;
+        color: whitesmoke;
+        margin-left: 3em;
+        background: url(./docs-bg.png);
+        background-repeat: repeat-x;
+        background-size: auto 100vh;
+        background-position-x: center;
+        background-attachment: fixed;
+      }
+      .prismify {
+        display: inline-block;
+      }
+      .prismify > * {
+        animation: ease-in-out infinite alternate prismify-rotate;
+      }
+      h1 {
+        display: flex;
+      }
+      .td-title {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .td-title > * {
+        font-size: 2em;
+        transform: rotateX(-10deg) rotateY(-10deg) var(--z-transform);
+        --hue: calc(360deg * var(--index));
+        --sat: calc(30% + 70% * var(--index));
+        --light: calc(100% - 50% * var(--index));
+        color: hsl(var(--hue) var(--sat) var(--light));
+        --prism-depth: 5em;
+      }
+      .td-title > :first-child {
+        color: white;
+      }
+      .td-text > * {
+        animation-duration: 5s;
+        color: hsl(calc(360deg * var(--index)) 70% 70%);
+        font-size: 5em;
+        --x-rotate-amount: 10deg;
+        --y-rotate-amount: 10deg;
+        --z-offset: 5em;
+      }
+      .td-input {
+        --layer-count: 5;
+      }
+      .td-input > * {
+        animation-duration: 2s;
+        --x-rotate-amount: calc(-30deg * var(--index));
+        --y-rotate-amount: calc(60deg * var(--index));
+        --prism-depth: 5em;
+      }
+      .td-svg > * {
+        animation-duration: 10s;
+        animation-delay: -5s;
+        --x-rotate-amount: 110deg;
+        --y-rotate-amount: 15deg;
+      }
+      .td-link {
+        color: hsl(300deg 70% 70%);
+      }
+      .td-link > * {
+        animation-duration: 1s;
+        color: hsl(calc(180 + var(--index) * 120) 70% 70%);
+        --x-rotate-amount: calc(25deg * var(--index));
+        --y-rotate-amount: calc(-25deg * var(--index));
+      }
+      .example1 > * {
+        font-size: 5em;
+        transform: rotateY(-30deg) rotateX(10deg) var(--z-transform);
+        color: hsl(0deg calc(var(--index) * 100%) 50%);
+      }
+      .example2 > * {
+        font-size: 5em;
+        animation: 4s ease-in-out infinite alternate prismify-rotate;
+        --x-rotate-amount: 180deg;
+        --z-offset: -0.5em;
+        color: hsl(calc(160deg + var(--index) * 40deg) 80% 50%);
+      }
+      .example3 {
+        --layer-count: 5;
+        padding-top: 2em;
+      }
+      .example3 > * {
+        font-size: 5em;
+        transform: rotateX(70deg) var(--z-transform);
+        --prism-depth: 0.5em;
+        color: hsl(calc(var(--index) * 360deg) 100% 50%);
+      }
+      @keyframes example4-extend {
+        0% {
+          transform: rotateX(calc(var(--index) * -45deg))
+            rotateY(calc(var(--index) * -45deg)) var(--z-transform);
+        }
+        50% {
+          transform: rotateX(0deg) rotateY(0deg) var(--z-transform);
+        }
+        100% {
+          transform: rotateX(calc(var(--index) * -45deg))
+            rotateY(calc(var(--index) * 45deg)) var(--z-transform);
+        }
+      }
+      .example4 {
+        margin-bottom: 3em;
+      }
+      .example4 > * {
+        font-size: 5em;
+        animation: 2s linear infinite alternate example4-extend;
+        color: hsl(0deg 0% calc(var(--index) * 100%));
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/prismjs@v1.x/themes/prism.css"
+    />
+    <script src="https://unpkg.com/prismjs@v1.x/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
+  </head>
+  <body>
+    <h1><span class="prismify td-title">Prismify</span></h1>
+    <p>
+      Make CSS-powered 3D "prisms" of
+      <span class="prismify td-text">text</span>,
+      <span class="prismify td-input" id="rotated-input"
+        ><input value="inputs" /></span
+      >,
+      <span class="prismify td-svg"
+        ><span>
+          <svg
+            width="100"
+            height="95"
+            viewBox="0 0 100 95"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:svg="http://www.w3.org/2000/svg"
+          >
+            <path
+              style="fill: #008000"
+              d="M 81.10103,91.620409 50.134107,72.280106 19.305775,91.840567 28.130191,56.412791 6.0806878e-4,33.13782 36.421319,30.582553 49.864613,-3.362631 63.549435,30.485903 99.98743,32.781596 72.024404,56.256408 Z"
+            />
+            <text x="27" y="50" style="font-weight: bold; font-size: 1.3em">
+              SVG
+            </text>
+          </svg>
+        </span></span
+      >, and anything else with this library and some CSS/JS glue!
+    </p>
+    <h2>Setup</h2>
+    <h3>Manually</h3>
+    <p>
+      Load the needed CSS and import the JS package from a CDN or a local copy.
+    </p>
+    <pre><code class="language-html">&lt;head&gt;
+  ...
+  &lt;link rel="stylesheet" href="https://unpkg.com/prismify@1.0.0/prismify.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ...
+  &lt;script&gt;
+    import { prismifyOnPage } from "https://unpkg.com/prismify@1.0.0/prismify.js"
+    prismifyOnPage()
+  &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+    <h3>Bundlers</h3>
+    <p>
+      Install the
+      <a href="https://npmjs.org/package/prismify"><code>prismify</code></a>
+      package.<br />
+      Most bundlers which output HTML should support requiring CSS like so:
+    </p>
+    <pre><code class="language-js">import "prismify/prismify.css"
+import { prismifyOnPage } from "prismify"
+prismifyOnPage()</code></pre>
+    <h2>Examples</h2>
+    <pre><code class="language-html">&lt;div class="prismify fun-text"&gt;Hello&lt;/div&gt;</code></pre>
+    <pre><code class="language-css">.fun-text > * {
+  font-size: 5em;
+  transform: rotateY(-30deg) rotateX(10deg) var(--z-transform);
+  color: hsl(0deg calc(var(--index) * 100%) 50%);
+}</code></pre>
+    <div class="prismify example1">Hello</div>
+    <pre><code class="language-css">.fun-text > * {
+  font-size: 5em;
+  animation: 4s ease-in-out infinite alternate prismify-rotate;
+  --x-rotation-amount: 180deg;
+  --z-offset: -0.5em;
+  color: hsl(calc(160deg + var(--index) * 40deg) 80% 50%);
+}</code></pre>
+    <div class="prismify example2">Hello</div>
+    <pre><code class="language-css">.fun-text {
+  --layer-count: 5;
+}
+.fun-text > * {
+  font-size: 5em;
+  transform: rotateX(70deg) var(--z-transform);
+  --prism-depth: 0.5em;
+  color: hsl(calc(var(--index) * 360deg) 100% 50%);
+}</code></pre>
+    <div class="prismify example3">Hello</div>
+    <pre><code class="language-css">@keyframes fun-extend {
+  0% {
+    transform: rotateX(calc(var(--index) * -45deg))
+      rotateY(calc(var(--index) * -45deg)) var(--z-transform);
+  }
+  50% {
+    transform: rotateX(0deg) rotateY(0deg) var(--z-transform);
+  }
+  100% {
+    transform: rotateX(calc(var(--index) * -45deg))
+      rotateY(calc(var(--index) * 45deg)) var(--z-transform);
+  }
+}
+.fun-text > * {
+  font-size: 5em;
+  animation: 2s linear infinite alternate fun-extend;
+  color: hsl(0deg 0% calc(var(--index) * 100%));
+}</code></pre>
+    <div class="prismify example4">Hello</div>
+    <p>
+      If you want more examples, look at the source code for the prisms at the
+      top (and bottom) of this page!
+    </p>
+    <h2>Usage</h2>
+
+    <h3>JS</h3>
+    <p>
+      Just loading the CSS and JS doesn't do anything. To prismify elements, a
+      function must be called:
+    </p>
+
+    <ul>
+      <li>
+        <code class="language-js">prismifyOnPage()</code> prismifies all
+        elements in the document which have the "prismify" class.
+      </li>
+
+      <li>
+        <code class="language-js">prismifyElement(el)</code> prismifies one
+        given element.
+      </li>
+    </ul>
+    <h3>Layers</h3>
+    <pre><code class="language-html">&lt;div class="prismify"&gt;Hello&lt;/div&gt;</code></pre>
+    <div class="prismify">Hello</div>
+    <p>
+      A prismified element is just an element whose child element has been
+      copies multiple times (each copy is called a "layer") and assigned an
+      <code class="language-css">--index</code>. Index goes from 1 to 0, where
+      the first and closest element has the index of 1, and the last element has
+      an index of 0. (Not really; it's actually
+      <code class="language-js">1 / layerCount</code>).
+    </p>
+    <h3>CSS Variable Customization</h3>
+    <p>
+      There are multiple CSS variables which control various aspects of the
+      prism looks.
+    </p>
+    <ul>
+      <li>
+        <code class="language-css">--layer-count</code> controls the amount of
+        layers created.
+        <b>Must be set on the base prismify element, not on its children.</b>
+        Default: 50
+      </li>
+      <li>
+        <code class="language-css">--z-offset</code> - all layers will be offset
+        by this amount. Default: <code class="language-css">0.1em</code>
+      </li>
+      <li>
+        <code class="language-css">--prism-depth</code> - the distance between
+        the first and last layer. Default:
+        <code class="language-css">1em</code>
+      </li>
+      <li>
+        <code class="language-css">--x-rotate-amount</code>,
+        <code class="language-css">--y-rotate-amount</code> - offset amount for
+        the built-in
+        <code class="language-css">prismify-rotate</code> animation.
+      </li>
+    </ul>
+    <h3>Animations</h3>
+    <p>
+      Prismify has a built-in animation called
+      <code class="language-css">prismify-rotate</code>. It rotates the prism
+      layers by the Y and X axes. The degrees to rotate must be set with the X
+      and Y rotate amount CSS variables.
+    </p>
+    <p>
+      Animations shouldn't be applied to a base prismify element, but to its
+      children.
+    </p>
+    <p>
+      Custom animations working with prismify prisms should always add
+      <code class="language-css">var(--z-transform)</code> at the end of all
+      <code class="language-css">transform</code> properties to correctly set
+      the layers' position on the Z axis.
+    </p>
+    <p>
+      Adding the class
+      <a href="https://xkcd.com/1692" target="_blank"
+        ><code class="language-css">fun-mode</code></a
+      >
+      to a base prismify element enables "fun mode", where layers with a lesser
+      index always appear before later layers, even if they shouldn't. This
+      effectively reverses display order.
+    </p>
+    <h2>Credits</h2>
+    <p>
+      Made by G lander (<a
+        href="https://glander.club/"
+        target="_blank"
+        class="prismify fun-mode td-link"
+        ><span>glander.club</span></a
+      >).
+    </p>
+    <script type="module">
+      import { prismifyOnPage } from "../prismify.js"
+      prismifyOnPage()
+      const rotatedInputs = document.querySelectorAll("#rotated-input > *")
+      for (const input of rotatedInputs) {
+        input.addEventListener("input", () => {
+          for (const updatedInput of rotatedInputs) {
+            updatedInput.value = input.value
+          }
+        })
+      }
+    </script>
+  </body>
+</html>
