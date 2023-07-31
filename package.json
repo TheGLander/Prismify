@@ -16,5 +16,10 @@
     "prismify.css",
     "prismify.d.ts",
     "prismify.js"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheGLander/Prismify.git"
+  },
+  "homepage": "https://theglander.github.io/Prismify"
 }
